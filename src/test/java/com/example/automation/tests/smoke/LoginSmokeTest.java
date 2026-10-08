@@ -1,0 +1,4 @@
+package com.example.automation.tests.smoke;
+import com.example.automation.base.BaseTest; import com.example.automation.core.config.ConfigManager; import com.example.automation.core.driver.DriverManager; import com.example.automation.data.factory.TestDataFactory; import com.example.automation.workflows.LoginWorkflow; import org.testng.Assert; import org.testng.annotations.*; import com.example.automation.data.models.UserData;
+@Listeners(com.example.automation.listeners.TestListener.class)
+public class LoginSmokeTest extends BaseTest { @Test(groups={"smoke","ui"}) public void validLogin(){ UserData u=TestDataFactory.validLogin(); String message=new LoginWorkflow(DriverManager.getDriver(),ConfigManager.get().baseUrl()).login(u.username(),u.password()); Assert.assertTrue(message.contains("You logged into a secure area!"),message); } }
